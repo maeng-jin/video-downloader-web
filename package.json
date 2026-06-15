@@ -1,0 +1,16 @@
+{
+  "name": "video-downloader-web",
+  "version": "1.0.0",
+  "description": "URL을 입력하면 유튜브·인스타그램·당근마켓 영상을 화질 선택/오디오 추출로 다운로드하는 웹 서비스",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "express": "^4.19.2",
+    "playwright": "^1.48.0"
+  }
+}

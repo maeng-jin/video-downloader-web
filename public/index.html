@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영상 다운로더</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>🎬 영상 다운로더</h1>
+      <p class="subtitle">
+        유튜브 · 인스타그램 · 당근마켓 영상을 화질 선택/오디오(mp3) 추출로
+        다운로드합니다.
+      </p>
+    </header>
+
+    <main class="container">
+      <section class="search">
+        <form id="search-form">
+          <input
+            id="url-input"
+            type="url"
+            placeholder="영상 페이지 URL을 붙여넣으세요 (youtube / instagram / daangn)"
+            autocomplete="off"
+            required
+          />
+          <button type="submit" id="fetch-btn">불러오기</button>
+          <button type="button" id="reset-btn" title="입력값과 주소를 초기화합니다">
+            초기화
+          </button>
+        </form>
+        <div class="cookie-row">
+          <label class="opt checkbox">
+            <input type="checkbox" id="use-cookies" />
+            🔐 브라우저 로그인 쿠키 사용
+          </label>
+          <select id="cookie-browser" disabled>
+            <option value="chrome">Chrome</option>
+            <option value="edge">Edge</option>
+            <option value="firefox">Firefox</option>
+            <option value="brave">Brave</option>
+          </select>
+          <span class="cookie-hint"
+            >인스타그램 등 로그인 필요 콘텐츠용. 선택한 브라우저에 해당 사이트로
+            로그인되어 있어야 합니다.</span
+          >
+        </div>
+
+        <p class="notice">
+          ⚠️ 각 플랫폼의 이용약관과 저작권을 지켜 주세요. 본인이 권리를 가진
+          콘텐츠 또는 다운로드가 허용된 범위·개인 학습용으로만 사용해야 합니다.
+          비공개 콘텐츠 다운로드 시 책임은 사용자에게 있습니다.
+        </p>
+      </section>
+
+      <div id="status" class="status" hidden></div>
+
+      <!-- 메타데이터 미리보기 -->
+      <section id="preview" class="preview" hidden>
+        <div class="preview-head">
+          <img id="thumb" class="thumb" alt="" hidden />
+          <div class="meta">
+            <span id="platform-badge" class="badge"></span>
+            <h2 id="title"></h2>
+            <p id="submeta" class="submeta"></p>
+          </div>
+        </div>
+
+        <!-- yt-dlp 플랫폼: 화질/오디오 옵션 -->
+        <div id="ytdlp-options" class="options" hidden>
+          <label class="opt">
+            화질
+            <select id="quality"></select>
+          </label>
+          <label class="opt">
+            자막
+            <select id="subtitle">
+              <option value="">자막 없음</option>
+            </select>
+          </label>
+          <label class="opt checkbox">
+            <input type="checkbox" id="embed-sub" disabled />
+            영상에 자막 포함
+          </label>
+          <label class="opt checkbox">
+            <input type="checkbox" id="audio-only" />
+            오디오만(mp3)
+          </label>
+          <button id="sub-download-btn" type="button" disabled>
+            자막 다운로드(.srt)
+          </button>
+          <button id="download-btn" class="primary" type="button">
+            다운로드
+          </button>
+        </div>
+
+        <!-- 당근마켓(ffmpeg): 찾은 영상 목록 -->
+        <div id="daangn-list" class="daangn-list" hidden></div>
+      </section>
+
+      <!-- 진행률 -->
+      <section id="progress-box" class="progress-box" hidden>
+        <div class="progress-label">
+          <span id="progress-stage">준비 중</span>
+          <span id="progress-pct"></span>
+        </div>
+        <div class="bar"><div id="bar-fill" class="bar-fill"></div></div>
+        <div id="progress-result" class="progress-result"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>powered by yt-dlp + ffmpeg · 개인/학습용</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# logs (서버 로그 — 검색 URL/LAN IP 등이 평문으로 남을 수 있음)
+*.log
+logs/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# secrets / env
+.env
+.env.*
+
+# download / temp output (작업 임시파일은 OS temp에 생성되나 방어적으로 무시)
+downloads/
+tmp/
